@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo List</title>
+<!-- CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" >
+<!-- font awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"/>
+<!-- JavaScript Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" ></script>
+
+    <style>
+        body{
+            background-image: linear-gradient( #085078,#85d8ce);
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-attachment: fixed;
+        }
+        input:focus{
+            box-shadow: none !important;
+           border:1px solid #085078 !important;
+        }
+        ul li{
+            border-radius: 0 !important;
+            height: 2.5em;
+           
+        }
+        .list-btn{
+            border-radius: 0 !important;
+            height: 2.5em;
+            margin-left: 200px !important;
+        }
+        .card{
+            width: 30em;
+            margin-top: 10% !important ;
+            margin-left: auto;
+            margin-right: auto;
+            border: none;
+        }
+        .card-header{
+            border-bottom: none;
+            background: transparent;
+            letter-spacing: 3px;
+            color: #085078;
+            font-size: 26px;
+            font-weight: 600;
+            font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        }
+        .form-btn{
+            background: #085078;
+            color: #fff;
+        }
+        .form-btn:hover{
+            background: #085078;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="card mt-5">
+            <div class="card-header">
+               TODO
+            </div>
+            <div class="card-body">
+                <form method="post" action="">
+                    {% csrf_token %}
+                    <div class="input-group mb-3">
+                        <input type="text" name="list" id="list" class="form-control" placeholder="Add your todo">
+                        <button class="form-btn btn" type="submit">
+                            <i class="fa-solid fa-plus"></i>
+                        </button>
+                      </div>
+                </form>
+
+                   <!-- list -->
+
+        <ul class="list-group mt-5 mb-2">
+            {% for i in Data %}
+            <li class="list-group-item d-flex mb-2 pe-0 justify-content-between align-items-center">
+              {{i.list}}
+              <a class="list-btn btn btn btn-danger" href="{% url 'delete' i.id %}" 
+               onclick="return confirm('Are you sure you want to delete?')">
+                <i class="fa-solid fa-trash-can"></i>
+              </a>
+            </li>
+            {% endfor %}
+           
+          </ul>
+            </div>
+          </div>
+     
+    </div>
+    
+</body>
+</html>
